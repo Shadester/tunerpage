@@ -1,4 +1,4 @@
-# String Setup
+# StringThing
 
 A web app to help with restringing guitars and basses. Features a chromatic tuner, step-by-step restringing guide, and a string slack calculator.
 

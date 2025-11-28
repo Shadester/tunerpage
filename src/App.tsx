@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="app">
       <header>
-        <h1>String Setup</h1>
+        <h1>StringThing</h1>
         <p className="subtitle">Bass & Guitar Restringing Assistant</p>
       </header>
 
