@@ -35,7 +35,7 @@ function autoCorrelate(buffer: Float32Array, sampleRate: number): number {
   }
   rms = Math.sqrt(rms / SIZE)
 
-  if (rms < 0.01) return -1 // Not enough signal
+  if (rms < 0.005) return -1 // Not enough signal (lowered threshold)
 
   let r1 = 0, r2 = SIZE - 1
   const threshold = 0.2
@@ -135,12 +135,32 @@ export function usePitchDetection() {
   const startListening = useCallback(async () => {
     try {
       setError(null)
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+
+      // Check if getUserMedia is available
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        setError('Microphone access is not supported in this browser.')
+        return
+      }
+
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          echoCancellation: false,
+          noiseSuppression: false,
+          autoGainControl: false
+        }
+      })
       streamRef.current = stream
 
       audioContextRef.current = new AudioContext()
+
+      // Resume audio context if suspended (required by some browsers)
+      if (audioContextRef.current.state === 'suspended') {
+        await audioContextRef.current.resume()
+      }
+
       analyserRef.current = audioContextRef.current.createAnalyser()
-      analyserRef.current.fftSize = 2048
+      analyserRef.current.fftSize = 4096 // Larger for better low frequency detection
+      analyserRef.current.smoothingTimeConstant = 0.1
 
       const source = audioContextRef.current.createMediaStreamSource(stream)
       source.connect(analyserRef.current)
@@ -148,7 +168,8 @@ export function usePitchDetection() {
       setIsListening(true)
       analyze()
     } catch (err) {
-      setError('Microphone access denied. Please allow microphone access to use the tuner.')
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error'
+      setError(`Microphone access denied: ${errorMessage}`)
       console.error('Error accessing microphone:', err)
     }
   }, [analyze])

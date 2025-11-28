@@ -101,7 +101,7 @@ export default function Tuner() {
                 <button
                   key={i}
                   className={`string-note ${playingFrequency === s.freq ? 'playing' : ''}`}
-                  onClick={() => playTone(s.freq)}
+                  onClick={() => playTone(s.freq, false)}
                 >
                   <span className="string-number">{s.string}</span>
                   <span className="note-name">{s.note}{s.octave}</span>
@@ -118,7 +118,7 @@ export default function Tuner() {
                 <button
                   key={i}
                   className={`string-note ${playingFrequency === s.freq ? 'playing' : ''}`}
-                  onClick={() => playTone(s.freq)}
+                  onClick={() => playTone(s.freq, true)}
                 >
                   <span className="string-number">{s.string}</span>
                   <span className="note-name">{s.note}{s.octave}</span>
@@ -135,7 +135,7 @@ export default function Tuner() {
                 <button
                   key={i}
                   className={`string-note ${playingFrequency === s.freq ? 'playing' : ''}`}
-                  onClick={() => playTone(s.freq)}
+                  onClick={() => playTone(s.freq, true)}
                 >
                   <span className="string-number">{s.string}</span>
                   <span className="note-name">{s.note}{s.octave}</span>
