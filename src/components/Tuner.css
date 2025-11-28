@@ -1,0 +1,263 @@
+.tuner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.error {
+  background: #ff4444;
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  max-width: 400px;
+  text-align: center;
+}
+
+.tuner-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  background: #1a1a2e;
+  border-radius: 16px;
+  min-width: 320px;
+}
+
+.note-display {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #666;
+  transition: color 0.2s;
+  display: flex;
+  align-items: baseline;
+}
+
+.note-display.active {
+  color: #00d4ff;
+}
+
+.note-display .note {
+  line-height: 1;
+}
+
+.note-display .octave {
+  font-size: 2rem;
+  margin-left: 0.25rem;
+  opacity: 0.7;
+}
+
+.frequency {
+  font-size: 1.25rem;
+  color: #888;
+}
+
+.cents-meter {
+  width: 100%;
+  max-width: 300px;
+}
+
+.cents-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.cents-bar {
+  height: 24px;
+  background: #2a2a3e;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cents-center {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #00d4ff;
+  transform: translateX(-50%);
+}
+
+.cents-indicator {
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  background: #666;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: left 0.1s, background 0.2s;
+}
+
+.cents-indicator.in-tune {
+  background: #00ff88;
+  box-shadow: 0 0 12px #00ff88;
+}
+
+.cents-indicator.flat {
+  background: #ff6b6b;
+}
+
+.cents-indicator.sharp {
+  background: #ffa500;
+}
+
+.cents-value {
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #888;
+  min-height: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cents-value .status {
+  font-weight: bold;
+}
+
+.cents-value .status.in-tune {
+  color: #00ff88;
+}
+
+.cents-value .status.flat {
+  color: #ff6b6b;
+}
+
+.cents-value .status.sharp {
+  color: #ffa500;
+}
+
+.listen-button {
+  padding: 1rem 3rem;
+  font-size: 1.25rem;
+  background: #00d4ff;
+  color: #000;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.listen-button:hover {
+  background: #00b8e0;
+  transform: scale(1.05);
+}
+
+.listen-button.listening {
+  background: #ff4444;
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.4); }
+  50% { box-shadow: 0 0 0 15px rgba(255, 68, 68, 0); }
+}
+
+.reference-tunings {
+  width: 100%;
+  max-width: 600px;
+}
+
+.reference-tunings h3 {
+  text-align: center;
+  margin-bottom: 0.25rem;
+  color: #888;
+}
+
+.reference-hint {
+  text-align: center;
+  color: #666;
+  font-size: 0.85rem;
+  margin: 0 0 1rem 0;
+}
+
+.tuning-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tuning-section {
+  background: #1a1a2e;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.tuning-section h4 {
+  margin: 0 0 0.75rem 0;
+  color: #00d4ff;
+  font-size: 0.9rem;
+}
+
+.string-notes {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.string-note {
+  background: #2a2a3e;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.string-note:hover {
+  border-color: #00d4ff;
+  background: #3a3a4e;
+}
+
+.string-note.playing {
+  border-color: #00ff88;
+  background: #1a2e2a;
+  box-shadow: 0 0 12px rgba(0, 255, 136, 0.3);
+}
+
+.string-number {
+  font-size: 0.65rem;
+  color: #666;
+  position: absolute;
+  top: 4px;
+  left: 6px;
+}
+
+.note-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.string-note small {
+  font-size: 0.7rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.playing-icon {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  color: #00ff88;
+  animation: bounce 0.5s infinite alternate;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-3px); }
+}

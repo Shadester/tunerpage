@@ -1,0 +1,240 @@
+.restring-guide {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.guide-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.option-group label {
+  font-size: 0.85rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.button-group {
+  display: flex;
+  gap: 0.25rem;
+  background: #1a1a2e;
+  padding: 0.25rem;
+  border-radius: 8px;
+}
+
+.button-group button {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.button-group button:hover {
+  color: #fff;
+}
+
+.button-group button.active {
+  background: #00d4ff;
+  color: #000;
+}
+
+.progress-bar {
+  height: 32px;
+  background: #1a1a2e;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00d4ff, #00ff88);
+  transition: width 0.3s;
+}
+
+.progress-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.floyd-tips {
+  background: #2a1a2e;
+  border: 1px solid #ff6b6b;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.floyd-tip {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #3a2a3e;
+}
+
+.floyd-tip:last-child {
+  border-bottom: none;
+}
+
+.floyd-tip h4 {
+  margin: 0 0 0.5rem 0;
+  color: #ff6b6b;
+}
+
+.floyd-tip p {
+  margin: 0;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.step {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: #1a1a2e;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.step:hover {
+  border-color: #00d4ff;
+}
+
+.step.completed {
+  background: #1a2e2a;
+  border-color: #00ff88;
+}
+
+.step.completed .step-content h3,
+.step.completed .step-content p {
+  opacity: 0.7;
+}
+
+.step-checkbox {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  background: #2a2a3e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #888;
+  transition: all 0.2s;
+}
+
+.step.completed .step-checkbox {
+  background: #00ff88;
+  color: #000;
+}
+
+.step-content {
+  flex: 1;
+}
+
+.step-content h3 {
+  margin: 0 0 0.5rem 0;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.step-content p {
+  margin: 0;
+  color: #aaa;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.step-content .tip {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: #2a2a3e;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #ffa500;
+}
+
+.step-illustration {
+  margin: 1rem 0;
+  background: #0a0a14;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.step-illustration .illustration {
+  max-width: 100%;
+  height: auto;
+  max-height: 120px;
+}
+
+.floyd-tip .step-illustration {
+  margin: 0.75rem 0;
+}
+
+.floyd-tip .step-illustration .illustration {
+  max-height: 100px;
+}
+
+.completion-message {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1a2e2a, #1a1a2e);
+  border-radius: 12px;
+  font-size: 1.25rem;
+  color: #00ff88;
+  margin-top: 1.5rem;
+  animation: celebrate 0.5s ease-out;
+}
+
+@keyframes celebrate {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.reset-button {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.75rem 2rem;
+  background: #2a2a3e;
+  border: none;
+  border-radius: 8px;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.reset-button:hover {
+  background: #3a3a4e;
+  color: #fff;
+}
