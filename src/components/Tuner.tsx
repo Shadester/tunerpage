@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { usePitchDetection } from '../hooks/usePitchDetection'
 import { useToneGenerator } from '../hooks/useToneGenerator'
+import StrobeTuner from './StrobeTuner'
 import './Tuner.css'
 
 type InstrumentType = 'guitar' | 'bass4' | 'bass5'
@@ -152,6 +153,9 @@ export default function Tuner() {
   const [inTuneCounter, setInTuneCounter] = useState(0)
   const inTuneTimerRef = useRef<number | null>(null)
 
+  // Strobe tuner mode
+  const [strobeMode, setStrobeMode] = useState(false)
+
   const getCentsIndicator = (cents: number) => {
     const position = Math.max(-50, Math.min(50, cents))
     const percentage = ((position + 50) / 100) * 100
@@ -271,11 +275,29 @@ export default function Tuner() {
             ))}
           </select>
         </div>
+
+        <div className="display-mode-selector">
+          <h3>Display Mode</h3>
+          <div className="mode-buttons">
+            <button
+              className={`mode-button ${!strobeMode ? 'active' : ''}`}
+              onClick={() => setStrobeMode(false)}
+            >
+              Standard
+            </button>
+            <button
+              className={`mode-button ${strobeMode ? 'active' : ''}`}
+              onClick={() => setStrobeMode(true)}
+            >
+              Strobe
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Current Target String Display */}
       <div className="target-string-display">
-        <div className="target-label">Tune String {targetString.string}</div>
+        <div className="target-label">Target Note</div>
         <div className="target-note">
           {targetString.note}<span className="target-octave">{targetString.octave}</span>
         </div>
@@ -295,7 +317,6 @@ export default function Tuner() {
             key={idx}
             className={`progress-string ${idx === currentStringIndex ? 'current' : ''} ${completedStrings[idx] ? 'complete' : ''}`}
           >
-            <div className="progress-string-number">{str.string}</div>
             <div className="progress-string-note">{str.note}</div>
             {completedStrings[idx] && <div className="progress-check">✓</div>}
           </div>
@@ -309,54 +330,68 @@ export default function Tuner() {
       )}
 
       {/* Tuner Display */}
-      <div className="tuner-display">
-        <div className={`note-display ${pitchData.isPlaying ? (isMatchingNote ? 'active' : 'wrong-note') : pitchData.note !== '-' ? 'faded' : ''}`}>
-          <span className="note">{pitchData.note}</span>
-          <span className="octave">{pitchData.octave > 0 ? pitchData.octave : ''}</span>
-        </div>
-
-        <div className="frequency">
-          {pitchData.isPlaying
-            ? `${pitchData.frequency} Hz`
-            : pitchData.note !== '-'
-              ? `${pitchData.frequency} Hz`
-              : 'Play a note...'}
-        </div>
-
-        {isMatchingNote && (
-          <div className="cents-meter">
-            <div className="cents-scale">
-              <span>-50</span>
-              <span>0</span>
-              <span>+50</span>
-            </div>
-            <div className="cents-bar">
-              <div className="cents-center" />
-              <div
-                className={`cents-indicator ${pitchData.isPlaying ? getTuningStatus(pitchData.cents) : ''}`}
-                style={{ left: `${getCentsIndicator(pitchData.cents)}%` }}
-              />
-            </div>
-            <div className="cents-value">
-              {(pitchData.isPlaying || pitchData.note !== '-') && (
-                <>
-                  {pitchData.cents > 0 ? '+' : ''}{pitchData.cents} cents
-                  <span className={`status ${pitchData.isPlaying ? getTuningStatus(pitchData.cents) : 'faded'}`}>
-                    {getTuningStatus(pitchData.cents) === 'in-tune' ? '✓ In Tune' :
-                     getTuningStatus(pitchData.cents) === 'flat' ? '↓ Flat' : '↑ Sharp'}
-                  </span>
-                </>
+      {strobeMode ? (
+        <>
+          {pitchData.isPlaying && isMatchingNote ? (
+            <StrobeTuner cents={pitchData.cents} isPlaying={pitchData.isPlaying} />
+          ) : (
+            <div className="tuner-display">
+              <div className={`note-display ${pitchData.isPlaying ? 'wrong-note' : pitchData.note !== '-' ? 'faded' : ''}`}>
+                <span className="note">{pitchData.note !== '-' ? pitchData.note : 'Play a note...'}</span>
+                <span className="octave">{pitchData.octave > 0 ? pitchData.octave : ''}</span>
+              </div>
+              {pitchData.note !== '-' && (
+                <div className="frequency">
+                  {pitchData.frequency} Hz
+                </div>
               )}
             </div>
+          )}
+        </>
+      ) : (
+        <div className="tuner-display">
+          <div className={`note-display ${pitchData.isPlaying ? (isMatchingNote ? 'active' : 'wrong-note') : pitchData.note !== '-' ? 'faded' : ''}`}>
+            <span className="note">{pitchData.note}</span>
+            <span className="octave">{pitchData.octave > 0 ? pitchData.octave : ''}</span>
           </div>
-        )}
 
-        {!isMatchingNote && pitchData.isPlaying && (
-          <div className="wrong-note-message">
-            Play string {targetString.string} ({targetString.note}{targetString.octave})
+          <div className="frequency">
+            {pitchData.isPlaying
+              ? `${pitchData.frequency} Hz`
+              : pitchData.note !== '-'
+                ? `${pitchData.frequency} Hz`
+                : 'Play a note...'}
           </div>
-        )}
-      </div>
+
+          {isMatchingNote && (
+            <div className="cents-meter">
+              <div className="cents-scale">
+                <span>-50</span>
+                <span>0</span>
+                <span>+50</span>
+              </div>
+              <div className="cents-bar">
+                <div className="cents-center" />
+                <div
+                  className={`cents-indicator ${pitchData.isPlaying ? getTuningStatus(pitchData.cents) : ''}`}
+                  style={{ left: `${getCentsIndicator(pitchData.cents)}%` }}
+                />
+              </div>
+              <div className="cents-value">
+                {(pitchData.isPlaying || pitchData.note !== '-') && (
+                  <>
+                    {pitchData.cents > 0 ? '+' : ''}{pitchData.cents} cents
+                    <span className={`status ${pitchData.isPlaying ? getTuningStatus(pitchData.cents) : 'faded'}`}>
+                      {getTuningStatus(pitchData.cents) === 'in-tune' ? '✓ In Tune' :
+                       getTuningStatus(pitchData.cents) === 'flat' ? '↓ Flat' : '↑ Sharp'}
+                    </span>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       <button
         className={`listen-button ${isListening ? 'listening' : ''}`}

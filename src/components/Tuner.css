@@ -492,6 +492,63 @@
   min-width: 280px;
 }
 
+.display-mode-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.display-mode-selector h3 {
+  margin: 0 0 1rem 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.mode-buttons {
+  display: flex;
+  gap: 0.35rem;
+  background: var(--surface);
+  padding: 0.35rem;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.mode-button {
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  font-weight: 600;
+}
+
+.mode-button:hover {
+  color: #fff;
+  background: var(--surface-hover);
+}
+
+.mode-button.active {
+  background: var(--gradient-primary);
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 2px 15px var(--primary-glow);
+}
+
+@media (max-width: 768px) {
+  .display-mode-selector h3 {
+    font-size: 0.85rem;
+    margin: 0 0 0.6rem 0;
+  }
+
+  .mode-button {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
 .target-string-display {
   width: 100%;
   background: var(--gradient-surface);
@@ -651,15 +708,6 @@
 .progress-string.complete {
   border-color: var(--accent);
   background: rgba(0, 255, 136, 0.1);
-}
-
-.progress-string-number {
-  font-size: 0.75rem;
-  color: #666;
-  font-weight: 600;
-  position: absolute;
-  top: 6px;
-  left: 8px;
 }
 
 .progress-string-note {
