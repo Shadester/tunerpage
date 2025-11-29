@@ -353,3 +353,125 @@
 .tips-section li strong {
   color: #fff;
 }
+
+/* Mobile Optimizations */
+
+@media (max-width: 768px) {
+  .help-section {
+    padding: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .help-section h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .help-item {
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
+
+  .help-item h4 {
+    font-size: 0.95rem;
+  }
+
+  .help-item p,
+  .help-item ul {
+    font-size: 0.85rem;
+  }
+
+  .form-section {
+    padding: 1.25rem;
+  }
+
+  .form-section h3 {
+    font-size: 0.85rem;
+  }
+
+  .button-group button,
+  .scale-options button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .custom-input {
+    gap: 0.75rem;
+  }
+
+  .custom-input label {
+    font-size: 0.85rem;
+  }
+
+  .custom-input input {
+    width: 80px;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .measurements {
+    gap: 1rem;
+  }
+
+  .measurement input {
+    width: 80px;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .results {
+    padding: 1.25rem;
+  }
+
+  .results h3 {
+    font-size: 1.1rem;
+  }
+
+  .results-intro {
+    font-size: 0.85rem;
+  }
+
+  .table-header,
+  .table-row {
+    grid-template-columns: 50px 1fr 1fr 70px;
+    padding: 0.7rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .string-num {
+    font-size: 1rem;
+  }
+
+  .quick-ref {
+    padding: 1rem;
+  }
+
+  .quick-ref h4 {
+    font-size: 0.95rem;
+  }
+
+  .quick-ref-content p {
+    font-size: 0.85rem;
+  }
+
+  .tips-section h4 {
+    font-size: 0.95rem;
+  }
+
+  .tips-section li {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-header,
+  .table-row {
+    grid-template-columns: 40px 70px 70px 60px;
+    padding: 0.6rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .string-num {
+    font-size: 0.9rem;
+  }
+}
