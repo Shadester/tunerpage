@@ -9,14 +9,32 @@ import SetupGuide from './components/SetupGuide'
 import TrussRodGuide from './components/TrussRodGuide'
 
 type Tab = 'tuner' | 'guide' | 'calculator' | 'gauges' | 'buzz' | 'setup' | 'trussrod'
+export type Instrument = 'guitar' | 'bass'
 
 function App() {
   const [activeTab, setActiveTab] = useState<Tab>('tuner')
+  const [instrument, setInstrument] = useState<Instrument>('guitar')
 
   return (
     <div className="app">
       <header>
-        <h1>StringThing</h1>
+        <div className="header-content">
+          <h1>StringThing</h1>
+          <div className="segmented-buttons">
+            <button
+              className={instrument === 'guitar' ? 'active' : ''}
+              onClick={() => setInstrument('guitar')}
+            >
+              Guitar
+            </button>
+            <button
+              className={instrument === 'bass' ? 'active' : ''}
+              onClick={() => setInstrument('bass')}
+            >
+              Bass
+            </button>
+          </div>
+        </div>
         <p className="subtitle">Bass & Guitar Restringing Assistant</p>
       </header>
 
@@ -66,13 +84,13 @@ function App() {
       </nav>
 
       <main>
-        {activeTab === 'tuner' && <Tuner />}
-        {activeTab === 'guide' && <RestringGuide />}
-        {activeTab === 'calculator' && <StringCalculator />}
-        {activeTab === 'gauges' && <StringGaugeRecommender />}
-        {activeTab === 'buzz' && <FretBuzzDiagnostic />}
-        {activeTab === 'setup' && <SetupGuide />}
-        {activeTab === 'trussrod' && <TrussRodGuide />}
+        {activeTab === 'tuner' && <Tuner instrument={instrument} />}
+        {activeTab === 'guide' && <RestringGuide instrument={instrument} />}
+        {activeTab === 'calculator' && <StringCalculator instrument={instrument} />}
+        {activeTab === 'gauges' && <StringGaugeRecommender instrument={instrument} />}
+        {activeTab === 'buzz' && <FretBuzzDiagnostic instrument={instrument} />}
+        {activeTab === 'setup' && <SetupGuide instrument={instrument} />}
+        {activeTab === 'trussrod' && <TrussRodGuide instrument={instrument} />}
       </main>
     </div>
   )

@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import './StringCalculator.css'
 
 type InstrumentType = 'guitar' | 'bass4' | 'bass5'
@@ -45,9 +45,24 @@ interface StringResult {
   windingTurns: number
 }
 
-export default function StringCalculator() {
-  const [instrument, setInstrument] = useState<InstrumentType>('guitar')
+interface StringCalculatorProps {
+  instrument: 'guitar' | 'bass'
+}
+
+export default function StringCalculator({ instrument: parentInstrument }: StringCalculatorProps) {
+  const [instrument, setInstrument] = useState<InstrumentType>(
+    parentInstrument === 'bass' ? 'bass4' : 'guitar'
+  )
   const [scaleLength, setScaleLength] = useState(25.5)
+
+  // Update instrument type when parent changes
+  useEffect(() => {
+    if (parentInstrument === 'bass' && instrument === 'guitar') {
+      setInstrument('bass4')
+    } else if (parentInstrument === 'guitar' && (instrument === 'bass4' || instrument === 'bass5')) {
+      setInstrument('guitar')
+    }
+  }, [parentInstrument, instrument])
   const [nutToFirstTunerCm, setNutToFirstTunerCm] = useState(10) // cm
   const [pegType, setPegType] = useState('standard')
   const [targetWraps, setTargetWraps] = useState(3)
@@ -79,7 +94,7 @@ export default function StringCalculator() {
   const slackNeeded = Math.round(results[0]?.slackNeededCm || 0)
 
   return (
-    <div className="string-calculator">
+    <div className="component-container string-calculator">
       <button
         className={`help-toggle ${showHelp ? 'active' : ''}`}
         onClick={() => setShowHelp(!showHelp)}
@@ -125,40 +140,32 @@ export default function StringCalculator() {
         </div>
       )}
 
-      <div className="calc-form">
-        <div className="form-section">
-          <h3>Instrument</h3>
-          <div className="button-group">
-            <button
-              className={instrument === 'guitar' ? 'active' : ''}
-              onClick={() => {
-                setInstrument('guitar')
-                setScaleLength(25.5)
-                setPegType('standard')
-              }}
-            >
-              Guitar
-            </button>
-            <button
-              className={instrument === 'bass4' ? 'active' : ''}
-              onClick={() => {
-                setInstrument('bass4')
-                setScaleLength(34)
-              }}
-            >
-              Bass 4
-            </button>
-            <button
-              className={instrument === 'bass5' ? 'active' : ''}
-              onClick={() => {
-                setInstrument('bass5')
-                setScaleLength(34)
-              }}
-            >
-              Bass 5
-            </button>
+      <div className="form-container calc-form">
+        {parentInstrument === 'bass' && (
+          <div className="selector-group">
+            <h3>String Count</h3>
+            <div className="segmented-buttons">
+              <button
+                className={instrument === 'bass4' ? 'active' : ''}
+                onClick={() => {
+                  setInstrument('bass4')
+                  setScaleLength(34)
+                }}
+              >
+                4-String
+              </button>
+              <button
+                className={instrument === 'bass5' ? 'active' : ''}
+                onClick={() => {
+                  setInstrument('bass5')
+                  setScaleLength(34)
+                }}
+              >
+                5-String
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="form-section">
           <h3>Scale Length</h3>
@@ -188,9 +195,9 @@ export default function StringCalculator() {
         </div>
 
         {instrument === 'guitar' && (
-          <div className="form-section">
+          <div className="selector-group">
             <h3>Tuning Peg Type</h3>
-            <div className="button-group">
+            <div className="segmented-buttons">
               <button
                 className={pegType === 'standard' ? 'active' : ''}
                 onClick={() => setPegType('standard')}

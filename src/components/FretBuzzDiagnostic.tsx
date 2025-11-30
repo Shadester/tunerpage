@@ -118,7 +118,11 @@ const getDiagnostic = (location: BuzzLocation): DiagnosticResult => {
   }
 }
 
-export default function FretBuzzDiagnostic() {
+interface FretBuzzDiagnosticProps {
+  instrument: 'guitar' | 'bass'
+}
+
+export default function FretBuzzDiagnostic({ instrument }: FretBuzzDiagnosticProps) {
   const [buzzLocation, setBuzzLocation] = useState<BuzzLocation>('all')
   const [buzzSeverity, setBuzzSeverity] = useState<BuzzSeverity>('moderate')
   const [showResult, setShowResult] = useState(false)
@@ -130,15 +134,15 @@ export default function FretBuzzDiagnostic() {
   }
 
   return (
-    <div className="fret-buzz-diagnostic">
-      <div className="diagnostic-intro">
+    <div className="component-container">
+      <div className="section-header">
         <h2>Fret Buzz Diagnostic</h2>
         <p>
           Answer the questions below to diagnose your fret buzz issue and get recommended solutions.
         </p>
       </div>
 
-      <div className="diagnostic-form">
+      <div className="form-container">
         <div className="form-section">
           <h3>Where does the buzz occur?</h3>
           <div className="location-grid">
@@ -207,9 +211,11 @@ export default function FretBuzzDiagnostic() {
           </div>
         </div>
 
-        <button className="diagnose-button" onClick={handleDiagnose}>
-          Get Diagnosis
-        </button>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+          <button className="primary-button" onClick={handleDiagnose}>
+            Get Diagnosis
+          </button>
+        </div>
       </div>
 
       {showResult && (

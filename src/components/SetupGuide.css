@@ -1,77 +1,30 @@
-.setup-guide {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 1rem;
-}
-
-.guide-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.guide-header h2 {
-  color: #00d4ff;
-  font-size: 2rem;
-  margin: 0 0 0.5rem 0;
-}
-
-.guide-header p {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 1.1rem;
-  margin: 0;
-}
-
 .guide-controls {
-  background: rgba(0, 212, 255, 0.05);
-  border: 1px solid rgba(0, 212, 255, 0.2);
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.control-section {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .control-section h3 {
-  margin: 0 0 0.75rem 0;
-  color: #00d4ff;
+  margin: 0 0 1rem 0;
+  color: var(--primary);
   font-size: 1rem;
   font-weight: 600;
-}
-
-.button-group {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.button-group button {
-  flex: 1;
-  padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.7);
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 0.95rem;
-}
-
-.button-group button:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(0, 212, 255, 0.3);
-}
-
-.button-group button.active {
-  background: rgba(0, 212, 255, 0.15);
-  border-color: #00d4ff;
-  color: #00d4ff;
-  font-weight: 600;
+  text-align: center;
 }
 
 .specs-box,
 .intro-box {
   background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 255, 136, 0.1));
-  border: 2px solid #00d4ff;
+  border: 2px solid var(--primary);
   border-radius: 8px;
   padding: 1.5rem;
   margin-bottom: 2rem;
@@ -80,7 +33,7 @@
 .specs-box h3,
 .intro-box h3 {
   margin: 0 0 1rem 0;
-  color: #00d4ff;
+  color: var(--primary);
   font-size: 1.3rem;
 }
 
@@ -114,7 +67,7 @@
 .spec-value {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #00ff88;
+  color: var(--accent);
   font-family: 'Courier New', monospace;
 }
 
@@ -135,7 +88,7 @@
 
 .step-section h3 {
   margin: 0 0 1rem 0;
-  color: #00d4ff;
+  color: var(--primary);
   font-size: 1.3rem;
 }
 
@@ -175,7 +128,7 @@
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, #00d4ff, #00ff88);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   color: #000;
   font-size: 1.3rem;
   font-weight: 700;
@@ -218,7 +171,7 @@
 
 .step-tip {
   background: rgba(0, 255, 136, 0.1);
-  border-left: 3px solid #00ff88;
+  border-left: 3px solid var(--accent);
   border-radius: 4px;
   padding: 0.75rem 1rem;
   margin-top: 0.75rem;
@@ -227,7 +180,7 @@
 }
 
 .step-tip strong {
-  color: #00ff88;
+  color: var(--accent);
 }
 
 .step-warning {
@@ -246,7 +199,7 @@
 
 .tips-section {
   background: rgba(0, 212, 255, 0.05);
-  border-left: 3px solid #00d4ff;
+  border-left: 3px solid var(--primary);
   border-radius: 4px;
   padding: 1.5rem;
   margin-bottom: 2rem;
@@ -254,7 +207,7 @@
 
 .tips-section h4 {
   margin: 0 0 1rem 0;
-  color: #00d4ff;
+  color: var(--primary);
   font-size: 1.1rem;
 }
 
@@ -282,7 +235,7 @@
 
 .reference-box h4 {
   margin: 0 0 1rem 0;
-  color: #00ff88;
+  color: var(--accent);
   font-size: 1.1rem;
 }
 

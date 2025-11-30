@@ -69,8 +69,11 @@ const BASS_GAUGE_SETS: Record<string, GaugeSet[]> = {
   ]
 }
 
-export default function StringGaugeRecommender() {
-  const [instrument, setInstrument] = useState<InstrumentType>('guitar')
+interface StringGaugeRecommenderProps {
+  instrument: InstrumentType
+}
+
+export default function StringGaugeRecommender({ instrument }: StringGaugeRecommenderProps) {
   const [tuning, setTuning] = useState<TuningType>('standard')
   const [playingStyle, setPlayingStyle] = useState<PlayingStyle>('medium')
 
@@ -89,31 +92,8 @@ export default function StringGaugeRecommender() {
   const recommended = getRecommendation()
 
   return (
-    <div className="string-gauge-recommender">
-      <div className="gauge-form">
-        <div className="form-section">
-          <h3>Instrument</h3>
-          <div className="button-group">
-            <button
-              className={instrument === 'guitar' ? 'active' : ''}
-              onClick={() => {
-                setInstrument('guitar')
-                setTuning('standard')
-              }}
-            >
-              Guitar
-            </button>
-            <button
-              className={instrument === 'bass' ? 'active' : ''}
-              onClick={() => {
-                setInstrument('bass')
-                setTuning('standard')
-              }}
-            >
-              Bass
-            </button>
-          </div>
-        </div>
+    <div className="component-container">
+      <div className="form-container">
 
         <div className="form-section">
           <h3>Tuning</h3>
@@ -159,9 +139,9 @@ export default function StringGaugeRecommender() {
           </div>
         </div>
 
-        <div className="form-section">
+        <div className="selector-group">
           <h3>Playing Style</h3>
-          <div className="button-group">
+          <div className="segmented-buttons">
             <button
               className={playingStyle === 'light' ? 'active' : ''}
               onClick={() => setPlayingStyle('light')}

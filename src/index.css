@@ -76,3 +76,191 @@ button:focus-visible {
 input {
   font-family: inherit;
 }
+
+/* Standardized Segmented Button Group */
+.selector-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.selector-group h3 {
+  margin: 0 0 1rem 0;
+  color: var(--text-muted);
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.segmented-buttons {
+  display: flex;
+  gap: 0.35rem;
+  background: var(--surface);
+  padding: 0.35rem;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.segmented-buttons button {
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.segmented-buttons button:hover {
+  color: #fff;
+  background: var(--surface-hover);
+  transform: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.segmented-buttons button.active {
+  background: var(--gradient-primary);
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 2px 15px var(--primary-glow);
+}
+
+.segmented-buttons button:focus,
+.segmented-buttons button:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .selector-group h3 {
+    font-size: 0.85rem;
+    margin: 0 0 0.6rem 0;
+  }
+
+  .segmented-buttons button {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Standardized Component Containers */
+.component-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.section-header h2 {
+  color: var(--primary);
+  font-size: 2rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
+.section-header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Standardized Form/Control Sections */
+.form-container {
+  background: rgba(0, 212, 255, 0.05);
+  border: 2px solid rgba(0, 212, 255, 0.2);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.form-section:last-child {
+  margin-bottom: 0;
+}
+
+.form-section h3 {
+  margin: 0 0 1rem 0;
+  color: var(--primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.form-section label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Standardized Content Cards */
+.content-card {
+  background: var(--gradient-surface);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+/* Standardized Action Buttons */
+.primary-button {
+  padding: 1rem 2.5rem;
+  background: var(--gradient-primary);
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px var(--primary-glow);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.primary-button:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 6px 30px var(--primary-glow);
+}
+
+.primary-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  .section-header h2 {
+    font-size: 1.6rem;
+  }
+
+  .section-header p {
+    font-size: 1rem;
+  }
+
+  .form-container {
+    padding: 1.5rem;
+  }
+
+  .form-section h3 {
+    font-size: 1rem;
+  }
+
+  .primary-button {
+    padding: 0.85rem 2rem;
+    font-size: 0.9rem;
+  }
+}

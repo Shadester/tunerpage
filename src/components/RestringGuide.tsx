@@ -144,8 +144,11 @@ const FLOYD_ROSE_TIPS: FloydStep[] = [
   }
 ]
 
-export default function RestringGuide() {
-  const [instrument, setInstrument] = useState<InstrumentType>('guitar')
+interface RestringGuideProps {
+  instrument: InstrumentType
+}
+
+export default function RestringGuide({ instrument }: RestringGuideProps) {
   const [bridgeType, setBridgeType] = useState<BridgeType>('hardtail')
   const [completedSteps, setCompletedSteps] = useState<Set<number>>(new Set())
 
@@ -170,30 +173,12 @@ export default function RestringGuide() {
   const progress = (completedSteps.size / steps.length) * 100
 
   return (
-    <div className="restring-guide">
+    <div className="component-container restring-guide">
       <div className="guide-options">
-        <div className="option-group">
-          <label>Instrument</label>
-          <div className="button-group">
-            <button
-              className={instrument === 'guitar' ? 'active' : ''}
-              onClick={() => { setInstrument('guitar'); resetProgress() }}
-            >
-              Guitar
-            </button>
-            <button
-              className={instrument === 'bass' ? 'active' : ''}
-              onClick={() => { setInstrument('bass'); resetProgress() }}
-            >
-              Bass
-            </button>
-          </div>
-        </div>
-
         {instrument === 'guitar' && (
           <div className="option-group">
             <label>Bridge Type</label>
-            <div className="button-group">
+            <div className="segmented-buttons">
               <button
                 className={bridgeType === 'hardtail' ? 'active' : ''}
                 onClick={() => setBridgeType('hardtail')}

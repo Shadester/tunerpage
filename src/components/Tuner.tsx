@@ -141,12 +141,27 @@ const BASS_TUNINGS: Record<string, Tuning[]> = {
   ]
 }
 
-export default function Tuner() {
+interface TunerProps {
+  instrument: 'guitar' | 'bass'
+}
+
+export default function Tuner({ instrument }: TunerProps) {
   const { pitchData, isListening, error, startListening, stopListening } = usePitchDetection()
   const { playTone, playingFrequency } = useToneGenerator()
 
-  // Guided tuning mode state
-  const [instrumentType, setInstrumentType] = useState<InstrumentType>('guitar')
+  // Map parent instrument to internal instrument type
+  const [instrumentType, setInstrumentType] = useState<InstrumentType>(
+    instrument === 'bass' ? 'bass4' : 'guitar'
+  )
+
+  // Update instrumentType when parent instrument changes
+  useEffect(() => {
+    if (instrument === 'bass' && instrumentType === 'guitar') {
+      setInstrumentType('bass4')
+    } else if (instrument === 'guitar' && (instrumentType === 'bass4' || instrumentType === 'bass5')) {
+      setInstrumentType('guitar')
+    }
+  }, [instrument, instrumentType])
   const [tuningIndex, setTuningIndex] = useState(0)
   const [currentStringIndex, setCurrentStringIndex] = useState(0)
   const [completedStrings, setCompletedStrings] = useState<boolean[]>([])
@@ -237,31 +252,27 @@ export default function Tuner() {
     <div className="tuner">
       {error && <div className="error">{error}</div>}
 
-      {/* Instrument & Tuning Selection */}
+      {/* Tuning Selection */}
       <div className="guided-tuning-setup">
-        <div className="instrument-selector">
-          <h3>Instrument</h3>
-          <div className="instrument-buttons">
-            <button
-              className={`instrument-button ${instrumentType === 'guitar' ? 'active' : ''}`}
-              onClick={() => setInstrumentType('guitar')}
-            >
-              Guitar
-            </button>
-            <button
-              className={`instrument-button ${instrumentType === 'bass4' ? 'active' : ''}`}
-              onClick={() => setInstrumentType('bass4')}
-            >
-              Bass 4-String
-            </button>
-            <button
-              className={`instrument-button ${instrumentType === 'bass5' ? 'active' : ''}`}
-              onClick={() => setInstrumentType('bass5')}
-            >
-              Bass 5-String
-            </button>
+        {instrument === 'bass' && (
+          <div className="selector-group">
+            <h3>String Count</h3>
+            <div className="segmented-buttons">
+              <button
+                className={instrumentType === 'bass4' ? 'active' : ''}
+                onClick={() => setInstrumentType('bass4')}
+              >
+                4-String
+              </button>
+              <button
+                className={instrumentType === 'bass5' ? 'active' : ''}
+                onClick={() => setInstrumentType('bass5')}
+              >
+                5-String
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="tuning-selection">
           <h3>Tuning</h3>
@@ -276,17 +287,17 @@ export default function Tuner() {
           </select>
         </div>
 
-        <div className="display-mode-selector">
+        <div className="selector-group">
           <h3>Display Mode</h3>
-          <div className="mode-buttons">
+          <div className="segmented-buttons">
             <button
-              className={`mode-button ${!strobeMode ? 'active' : ''}`}
+              className={!strobeMode ? 'active' : ''}
               onClick={() => setStrobeMode(false)}
             >
               Standard
             </button>
             <button
-              className={`mode-button ${strobeMode ? 'active' : ''}`}
+              className={strobeMode ? 'active' : ''}
               onClick={() => setStrobeMode(true)}
             >
               Strobe

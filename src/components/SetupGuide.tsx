@@ -4,39 +4,24 @@ import './SetupGuide.css'
 type GuideType = 'action' | 'intonation'
 type InstrumentType = 'guitar' | 'bass'
 
-export default function SetupGuide() {
+interface SetupGuideProps {
+  instrument: InstrumentType
+}
+
+export default function SetupGuide({ instrument }: SetupGuideProps) {
   const [guideType, setGuideType] = useState<GuideType>('action')
-  const [instrument, setInstrument] = useState<InstrumentType>('guitar')
 
   return (
-    <div className="setup-guide">
-      <div className="guide-header">
+    <div className="component-container">
+      <div className="section-header">
         <h2>Setup Adjustment Guide</h2>
         <p>Step-by-step instructions for adjusting your instrument's action and intonation</p>
       </div>
 
-      <div className="guide-controls">
-        <div className="control-section">
-          <h3>Instrument</h3>
-          <div className="button-group">
-            <button
-              className={instrument === 'guitar' ? 'active' : ''}
-              onClick={() => setInstrument('guitar')}
-            >
-              Guitar
-            </button>
-            <button
-              className={instrument === 'bass' ? 'active' : ''}
-              onClick={() => setInstrument('bass')}
-            >
-              Bass
-            </button>
-          </div>
-        </div>
-
-        <div className="control-section">
+      <div className="form-container">
+        <div className="selector-group">
           <h3>Adjustment Type</h3>
-          <div className="button-group">
+          <div className="segmented-buttons">
             <button
               className={guideType === 'action' ? 'active' : ''}
               onClick={() => setGuideType('action')}

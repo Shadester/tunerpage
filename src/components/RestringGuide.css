@@ -25,40 +25,6 @@
   font-weight: 600;
 }
 
-.button-group {
-  display: flex;
-  gap: 0.35rem;
-  background: var(--surface);
-  padding: 0.35rem;
-  border-radius: 12px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.button-group button {
-  padding: 0.6rem 1.25rem;
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  cursor: pointer;
-  border-radius: 8px;
-  transition: all 0.25s ease;
-  font-weight: 600;
-}
-
-.button-group button:hover {
-  color: #fff;
-  background: var(--surface-hover);
-  transform: none;
-  box-shadow: none;
-}
-
-.button-group button.active {
-  background: var(--gradient-primary);
-  color: #000;
-  font-weight: 700;
-  box-shadow: 0 2px 15px var(--primary-glow);
-}
-
 .progress-bar {
   height: 40px;
   background: var(--surface);
@@ -256,11 +222,6 @@
 
   .option-group label {
     font-size: 0.75rem;
-  }
-
-  .button-group button {
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
   }
 
   .progress-bar {

@@ -47,7 +47,7 @@
 
 .what-is-section h3 {
   margin: 0 0 1rem 0;
-  color: #00d4ff;
+  color: var(--primary);
   font-size: 1.4rem;
 }
 
@@ -105,10 +105,10 @@
 }
 
 .correct-bow {
-  background: #00ff88;
+  background: var(--accent);
   height: 4px;
   border-radius: 50% 50% 50% 50% / 100% 100% 0% 0%;
-  box-shadow: 0 0 8px #00ff88;
+  box-shadow: 0 0 8px var(--accent);
 }
 
 .too-much-bow {
@@ -139,7 +139,7 @@
 
 .measurement-section h3 {
   margin: 0 0 1.5rem 0;
-  color: #00d4ff;
+  color: var(--primary);
   font-size: 1.4rem;
 }
 
@@ -164,7 +164,7 @@
 .measure-num {
   width: 35px;
   height: 35px;
-  background: linear-gradient(135deg, #00d4ff, #00ff88);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   color: #000;
   font-size: 1.2rem;
   font-weight: 700;
@@ -191,7 +191,7 @@
 
 .measurement-input h4 {
   margin: 0 0 1rem 0;
-  color: #00d4ff;
+  color: var(--primary);
   font-size: 1.1rem;
   text-align: center;
 }
@@ -209,7 +209,7 @@
   padding: 0.75rem 1rem;
   background: rgba(0, 0, 0, 0.3);
   border: 2px solid rgba(0, 212, 255, 0.5);
-  color: #00ff88;
+  color: var(--accent);
   border-radius: 6px;
   font-size: 1.3rem;
   font-weight: 600;
@@ -249,7 +249,7 @@
 .calculate-button {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #00d4ff, #00ff88);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   border: none;
   color: #000;
   font-size: 1.1rem;
@@ -288,7 +288,7 @@
 
 .diagnosis-result.good {
   background: rgba(0, 255, 136, 0.1);
-  border: 2px solid #00ff88;
+  border: 2px solid var(--accent);
 }
 
 .diagnosis-result.tooMuch {
@@ -307,7 +307,7 @@
 }
 
 .diagnosis-result.good .result-icon {
-  color: #00ff88;
+  color: var(--accent);
 }
 
 .diagnosis-result.tooMuch .result-icon {
@@ -337,7 +337,7 @@
 
 .adjustment-box {
   background: rgba(0, 0, 0, 0.3);
-  border-left: 3px solid #00d4ff;
+  border-left: 3px solid var(--primary);
   border-radius: 4px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -345,7 +345,7 @@
 
 .adjustment-box h4 {
   margin: 0 0 1rem 0;
-  color: #00d4ff;
+  color: var(--primary);
   font-size: 1.1rem;
 }
 
@@ -361,7 +361,7 @@
 }
 
 .adjustment-box strong {
-  color: #00ff88;
+  color: var(--accent);
 }
 
 .symptoms {
@@ -407,7 +407,7 @@
 
 .adjustment-guide h3 {
   margin: 0 0 1.5rem 0;
-  color: #00d4ff;
+  color: var(--primary);
   font-size: 1.4rem;
   text-align: center;
 }
@@ -440,7 +440,7 @@
 }
 
 .safety-item.do h4 {
-  color: #00ff88;
+  color: var(--accent);
 }
 
 .safety-item.dont h4 {
@@ -460,14 +460,14 @@
 
 .tool-info {
   background: rgba(0, 212, 255, 0.05);
-  border-left: 3px solid #00d4ff;
+  border-left: 3px solid var(--primary);
   border-radius: 4px;
   padding: 1.5rem;
 }
 
 .tool-info h4 {
   margin: 0 0 1rem 0;
-  color: #00d4ff;
+  color: var(--primary);
   font-size: 1.1rem;
 }
 

@@ -90,33 +90,13 @@
   margin-bottom: 2.5rem;
 }
 
-.form-section {
-  background: var(--gradient-surface);
-  padding: 1.5rem;
-  border-radius: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-}
-
-.form-section h3 {
-  margin: 0 0 1rem 0;
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-}
-
-.button-group {
+.scale-options {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-bottom: 1.25rem;
 }
 
-.button-group button,
 .scale-options button {
   padding: 0.6rem 1.25rem;
   background: var(--surface);
@@ -128,7 +108,6 @@
   font-weight: 600;
 }
 
-.button-group button:hover,
 .scale-options button:hover {
   color: #fff;
   background: var(--surface-hover);
@@ -137,20 +116,12 @@
   box-shadow: 0 4px 15px var(--primary-glow);
 }
 
-.button-group button.active,
 .scale-options button.active {
   background: var(--gradient-primary);
   color: #000;
   border-color: transparent;
   font-weight: 700;
   box-shadow: 0 2px 15px var(--primary-glow);
-}
-
-.scale-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.25rem;
 }
 
 .custom-input {
@@ -389,7 +360,6 @@
     font-size: 0.85rem;
   }
 
-  .button-group button,
   .scale-options button {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;

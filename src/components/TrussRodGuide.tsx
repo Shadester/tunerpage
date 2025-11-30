@@ -3,23 +3,25 @@ import './TrussRodGuide.css'
 
 type ReliefIssue = 'tooMuch' | 'backBow' | 'checking' | 'good'
 
-export default function TrussRodGuide() {
+interface TrussRodGuideProps {
+  instrument: 'guitar' | 'bass'
+}
+
+export default function TrussRodGuide({ instrument }: TrussRodGuideProps) {
   const [reliefMeasurement, setReliefMeasurement] = useState<number>(0.25)
-  const [issue, setIssue] = useState<ReliefIssue>('checking')
 
   const determineIssue = (relief: number): ReliefIssue => {
     if (relief < 0) return 'backBow'
-    if (relief > 0.5) return 'tooMuch'
     if (relief >= 0.15 && relief <= 0.4) return 'good'
-    return 'checking'
+    if (relief > 0.4) return 'tooMuch'
+    // Between 0-0.15mm is too straight
+    return 'tooMuch'
   }
 
-  const handleCalculate = () => {
-    setIssue(determineIssue(reliefMeasurement))
-  }
+  const issue = determineIssue(reliefMeasurement)
 
   return (
-    <div className="truss-rod-guide">
+    <div className="component-container truss-rod-guide">
       <div className="warning-header">
         <div className="warning-icon">⚠️</div>
         <div className="warning-content">
@@ -111,9 +113,6 @@ export default function TrussRodGuide() {
               Medium Pick (~0.50mm)
             </button>
           </div>
-          <button className="calculate-button" onClick={handleCalculate}>
-            Analyze Relief
-          </button>
         </div>
       </div>
 
