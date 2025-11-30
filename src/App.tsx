@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import TunerV2 from './components/TunerV2'
+import Tuner from './components/Tuner'
 import RestringGuide from './components/RestringGuide'
 import StringCalculator from './components/StringCalculator'
 import StringGaugeRecommender from './components/StringGaugeRecommender'
@@ -84,7 +84,7 @@ function App() {
       </nav>
 
       <main>
-        {activeTab === 'tuner' && <TunerV2 instrument={instrument} />}
+        {activeTab === 'tuner' && <Tuner instrument={instrument} />}
         {activeTab === 'guide' && <RestringGuide instrument={instrument} />}
         {activeTab === 'calculator' && <StringCalculator instrument={instrument} />}
         {activeTab === 'gauges' && <StringGaugeRecommender instrument={instrument} />}

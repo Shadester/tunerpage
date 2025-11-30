@@ -63,7 +63,6 @@ function autoCorrelate(buffer: Float32Array, sampleRate: number): number {
 
   // Find first peak after the dip with better threshold
   // Use 0.9 * first peak as recommended threshold
-  let maxVal = -1
   let maxPos = -1
   const MIN_PERIOD = Math.floor(sampleRate / 1000) // 1000 Hz max
   const MAX_PERIOD = Math.floor(sampleRate / 70)   // 70 Hz min (lowest bass note is ~30Hz B0, but filter out footsteps/noise)
@@ -80,7 +79,6 @@ function autoCorrelate(buffer: Float32Array, sampleRate: number): number {
   const threshold = 0.9 * absMax
   for (let i = Math.max(d, MIN_PERIOD); i < Math.min(SIZE, MAX_PERIOD); i++) {
     if (c[i] > threshold && c[i] > c[i - 1] && c[i] > c[i + 1]) {
-      maxVal = c[i]
       maxPos = i
       break
     }
