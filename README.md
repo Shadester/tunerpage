@@ -2,9 +2,9 @@
 
 # 🎸 StringThing
 
-**A modern web app for guitar and bass players**
+**Your Complete Guitar & Bass Toolkit**
 
-*Helping you restring your instrument with precision and confidence*
+*Tuning, setup, diagnostics, and maintenance — all in one place*
 
 [![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -19,7 +19,7 @@
 
 ## 📖 About
 
-StringThing is a comprehensive web-based tool designed to help guitar and bass players with everything from restringing to setup and maintenance. Whether you're a beginner or a seasoned player, StringThing provides practical, hands-on tools for keeping your instrument in top shape.
+StringThing is a comprehensive web toolkit for guitar and bass players, providing everything you need for tuning, setup, diagnostics, and maintenance. From chromatic tuning to truss rod adjustments, StringThing offers professional-grade tools accessible right in your browser. Whether you're a beginner learning your first restring or a seasoned player dialing in your setup, StringThing has you covered.
 
 ### Why StringThing?
 

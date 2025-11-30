@@ -35,7 +35,7 @@ function App() {
             </button>
           </div>
         </div>
-        <p className="subtitle">Bass & Guitar Restringing Assistant</p>
+        <p className="subtitle">Your Complete Guitar & Bass Toolkit</p>
       </header>
 
       <nav className="tabs">
