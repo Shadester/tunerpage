@@ -40,15 +40,13 @@ StringThing is a comprehensive web toolkit for guitar and bass players, providin
 <details open>
 <summary>Click to expand</summary>
 
-- **Real-time pitch detection** using your device's microphone
-- **Dual display modes:** Standard tuner and visual Strobe mode with rotating pitch visualization
-- **Guided tuning mode** — Auto-advance through strings with visual cues
+- **Advanced pitch detection** using autocorrelation algorithm with high-pass filtering
+- **Real-time frequency analysis** at 48kHz sample rate for accuracy
+- **Automatic string detection** — highlights which string you're playing
 - Visual tuning indicator with ±50 cents range
 - Shows note name, octave, frequency, and cents deviation
 - Color-coded feedback: 🟢 In tune • 🔴 Flat • 🟠 Sharp
-- **Playable reference tones** with realistic plucked string sound
-- Synthesized tones using harmonics (not simple sine waves)
-- Optimized sound profiles for guitar vs. bass
+- **Low-frequency noise filtering** to ignore footsteps, HVAC, and ambient noise
 
 **Supported Tunings:**
 - 🎸 **Guitar** — Standard, Drop D, Half Step Down, Whole Step Down, DADGAD, Open G

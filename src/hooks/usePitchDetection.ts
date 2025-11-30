@@ -35,50 +35,62 @@ function autoCorrelate(buffer: Float32Array, sampleRate: number): number {
   }
   rms = Math.sqrt(rms / SIZE)
 
-  if (rms < 0.005) return -1 // Not enough signal (lowered threshold)
+  // Threshold to filter out noise but keep guitar signal
+  if (rms < 0.003) return -1
 
-  let r1 = 0, r2 = SIZE - 1
-  const threshold = 0.2
+  // Normalize buffer for better peak detection
+  const normalizedBuffer = new Float32Array(SIZE)
+  for (let i = 0; i < SIZE; i++) {
+    normalizedBuffer[i] = buffer[i] / rms
+  }
 
-  for (let i = 0; i < SIZE / 2; i++) {
-    if (Math.abs(buffer[i]) < threshold) {
-      r1 = i
-      break
+  // Autocorrelation
+  const c = new Array(SIZE).fill(0)
+  for (let i = 0; i < SIZE; i++) {
+    for (let j = 0; j < SIZE - i; j++) {
+      c[i] += normalizedBuffer[j] * normalizedBuffer[j + i]
     }
   }
 
-  for (let i = 1; i < SIZE / 2; i++) {
-    if (Math.abs(buffer[SIZE - i]) < threshold) {
-      r2 = SIZE - i
-      break
-    }
+  // Normalize autocorrelation
+  for (let i = 0; i < SIZE; i++) {
+    c[i] = c[i] / c[0]
   }
 
-  const buf2 = buffer.slice(r1, r2)
-  const c = new Array(buf2.length).fill(0)
-
-  for (let i = 0; i < buf2.length; i++) {
-    for (let j = 0; j < buf2.length - i; j++) {
-      c[i] += buf2[j] * buf2[j + i]
-    }
-  }
-
+  // Find first dip below 0
   let d = 0
-  while (c[d] > c[d + 1]) d++
+  while (d < SIZE - 1 && c[d] > 0) d++
 
+  // Find first peak after the dip with better threshold
+  // Use 0.9 * first peak as recommended threshold
   let maxVal = -1
   let maxPos = -1
+  const MIN_PERIOD = Math.floor(sampleRate / 1000) // 1000 Hz max
+  const MAX_PERIOD = Math.floor(sampleRate / 70)   // 70 Hz min (lowest bass note is ~30Hz B0, but filter out footsteps/noise)
 
-  for (let i = d; i < buf2.length; i++) {
-    if (c[i] > maxVal) {
-      maxVal = c[i]
-      maxPos = i
+  // First pass: find the absolute maximum in valid range
+  let absMax = -1
+  for (let i = Math.max(d, MIN_PERIOD); i < Math.min(SIZE, MAX_PERIOD); i++) {
+    if (c[i] > absMax) {
+      absMax = c[i]
     }
   }
+
+  // Second pass: find first peak above threshold (0.9 * absMax)
+  const threshold = 0.9 * absMax
+  for (let i = Math.max(d, MIN_PERIOD); i < Math.min(SIZE, MAX_PERIOD); i++) {
+    if (c[i] > threshold && c[i] > c[i - 1] && c[i] > c[i + 1]) {
+      maxVal = c[i]
+      maxPos = i
+      break
+    }
+  }
+
+  if (maxPos === -1) return -1
 
   let T0 = maxPos
 
-  // Parabolic interpolation
+  // Parabolic interpolation for sub-sample accuracy
   const x1 = c[T0 - 1] ?? 0
   const x2 = c[T0]
   const x3 = c[T0 + 1] ?? 0
@@ -86,7 +98,9 @@ function autoCorrelate(buffer: Float32Array, sampleRate: number): number {
   const a = (x1 + x3 - 2 * x2) / 2
   const b = (x3 - x1) / 2
 
-  if (a) T0 = T0 - b / (2 * a)
+  if (a !== 0) {
+    T0 = T0 - b / (2 * a)
+  }
 
   return sampleRate / T0
 }
@@ -146,12 +160,13 @@ export function usePitchDetection() {
         audio: {
           echoCancellation: false,
           noiseSuppression: false,
-          autoGainControl: false
+          autoGainControl: false,
+          sampleRate: 48000 // Explicitly request 48kHz for better resolution
         }
       })
       streamRef.current = stream
 
-      audioContextRef.current = new AudioContext()
+      audioContextRef.current = new AudioContext({ sampleRate: 48000 })
 
       // Resume audio context if suspended (required by some browsers)
       if (audioContextRef.current.state === 'suspended') {
@@ -159,11 +174,19 @@ export function usePitchDetection() {
       }
 
       analyserRef.current = audioContextRef.current.createAnalyser()
-      analyserRef.current.fftSize = 4096 // Larger for better low frequency detection
-      analyserRef.current.smoothingTimeConstant = 0.1
+      analyserRef.current.fftSize = 8192 // Larger for better low frequency detection (8192 is good balance)
+      analyserRef.current.smoothingTimeConstant = 0.3 // Moderate smoothing for balance between responsiveness and stability
 
       const source = audioContextRef.current.createMediaStreamSource(stream)
-      source.connect(analyserRef.current)
+
+      // Add high-pass filter to remove footsteps, HVAC, and other low-frequency noise
+      const highPassFilter = audioContextRef.current.createBiquadFilter()
+      highPassFilter.type = 'highpass'
+      highPassFilter.frequency.value = 60 // Cut off below 60Hz to eliminate noise while preserving lowest bass notes
+      highPassFilter.Q.value = 0.7 // Gentle rolloff
+
+      source.connect(highPassFilter)
+      highPassFilter.connect(analyserRef.current)
 
       setIsListening(true)
       analyze()
@@ -203,9 +226,18 @@ export function usePitchDetection() {
 
   useEffect(() => {
     return () => {
-      stopListening()
+      // Cleanup on unmount
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current)
+      }
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop())
+      }
+      if (audioContextRef.current) {
+        audioContextRef.current.close()
+      }
     }
-  }, [stopListening])
+  }, [])
 
   return {
     pitchData,
