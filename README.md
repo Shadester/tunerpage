@@ -23,11 +23,12 @@ StringThing is a comprehensive web-based tool designed to help guitar and bass p
 
 ### Why StringThing?
 
-- 🎯 **Accurate Tuning** — Real-time pitch detection with visual feedback
+- 🎯 **Accurate Tuning** — Real-time pitch detection with dual display modes (Standard & Strobe)
+- 🎸 **Unified Experience** — Global guitar/bass selector affects all tools across the app
 - 📚 **Guided Process** — Step-by-step instructions prevent mistakes
 - 🧮 **Smart Tools** — Calculate string slack, diagnose issues, and optimize setup
 - 🔧 **Setup Guides** — Professional-quality adjustment instructions
-- 🎨 **Beautiful UI** — Modern, vibrant design that's pleasant to use
+- 🎨 **Beautiful UI** — Modern, vibrant design with consistent styling throughout
 - 📱 **Works Everywhere** — Responsive design for desktop, tablet, and mobile
 
 ---
@@ -40,6 +41,8 @@ StringThing is a comprehensive web-based tool designed to help guitar and bass p
 <summary>Click to expand</summary>
 
 - **Real-time pitch detection** using your device's microphone
+- **Dual display modes:** Standard tuner and visual Strobe mode with rotating pitch visualization
+- **Guided tuning mode** — Auto-advance through strings with visual cues
 - Visual tuning indicator with ±50 cents range
 - Shows note name, octave, frequency, and cents deviation
 - Color-coded feedback: 🟢 In tune • 🔴 Flat • 🟠 Sharp
@@ -162,9 +165,11 @@ Safe and effective neck relief measurement and adjustment tool.
 
 **Features:**
 - Visual relief diagrams showing correct bow, excessive bow, and back bow
-- Measurement calculator with common reference objects
-- Analysis of relief measurements
-- Direction-specific adjustment instructions
+- Interactive measurement input with real-time analysis
+- Quick reference buttons (Business Card, Thin Pick, Medium Pick)
+- Automatic diagnosis based on relief measurement
+- Direction-specific adjustment instructions (clockwise vs. counterclockwise)
+- Symptom descriptions for each relief type
 - Comprehensive safety warnings
 - DO/DON'T checklist
 - Truss rod location guide
@@ -224,13 +229,15 @@ npm run preview
 
 ## 🎨 Design Philosophy
 
-StringThing features a **bold and vibrant** design system:
+StringThing features a **bold and vibrant** design system with a unified, consistent UI:
 
 - 🌈 **Gradient backgrounds** — Dynamic cyan-to-teal color schemes
 - 💎 **Glass-morphism effects** — Frosted glass UI elements with backdrop blur
 - ✨ **Glow effects** — Subtle shadows and lighting for depth
 - 🎭 **Smooth animations** — Polished transitions and hover states
 - 🌙 **Dark theme** — Optimized for extended use and focus
+- 🎯 **Design System** — Standardized components (segmented buttons, form containers, action buttons) for visual consistency
+- 🎨 **CSS Variables** — Centralized color system for easy theming
 
 ---
 
