@@ -122,7 +122,7 @@ interface FretBuzzDiagnosticProps {
   instrument: 'guitar' | 'bass'
 }
 
-export default function FretBuzzDiagnostic({ instrument }: FretBuzzDiagnosticProps) {
+export default function FretBuzzDiagnostic(_props: FretBuzzDiagnosticProps) {
   const [buzzLocation, setBuzzLocation] = useState<BuzzLocation>('all')
   const [buzzSeverity, setBuzzSeverity] = useState<BuzzSeverity>('moderate')
   const [showResult, setShowResult] = useState(false)

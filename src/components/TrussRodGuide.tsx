@@ -7,7 +7,7 @@ interface TrussRodGuideProps {
   instrument: 'guitar' | 'bass'
 }
 
-export default function TrussRodGuide({ instrument }: TrussRodGuideProps) {
+export default function TrussRodGuide(_props: TrussRodGuideProps) {
   const [reliefMeasurement, setReliefMeasurement] = useState<number>(0.25)
 
   const determineIssue = (relief: number): ReliefIssue => {
